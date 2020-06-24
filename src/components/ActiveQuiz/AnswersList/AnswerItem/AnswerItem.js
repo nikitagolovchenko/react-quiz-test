@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./AnswerItem.module.scss";
+import classes from "./AnswerItem.module.scss";
 
 const AnswerItem = (props) => {
-	const cls = [styles.AnswerItem];
+	const cls = [classes.AnswerItem];
 
 	if (props.state) {
     // добавляем либо succes либо error класс:
-    cls.push(styles[props.state]);
+    cls.push(classes[props.state]);
     console.log(cls);
 	}
 

@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./AnswersList.module.scss";
+import classes from "./AnswersList.module.scss";
 import AnswerItem from "./AnswerItem/AnswerItem";
 
 const AnswersList = (props) => (
-	<ul className={styles.AnswersList}>
+	<ul className={classes.AnswersList}>
 		{props.answers.map((answer, index) => {
       
 			return (
