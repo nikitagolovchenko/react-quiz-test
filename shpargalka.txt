@@ -1,9 +1,63 @@
 - папка containers - содержит компоненты которые имеют state, т.е корневые компоненты
-
+- папка components/UI - содержит элементы интерфейса (Buttons...)
 - Object.keys(obj) - превращает объект obj в массив ключей этого объекта
-
 - () => {} - стрелочная ф-ция чтобы не терять контекст this
-
-- папка components/UI - содержит элементы интерфейса (Buttons/Pagination....)
-
 - const cls = [] - массив классов <Components className={cls.join(' ')}/>
+
+**** Routing *****
+- npm i react-router-dom
+- index.js: <BrowserRouter><App/></BrowserRouter>
+- App.js: <Route exact path="/" render={() => <h1>Home</h1>} />
+          <Route path="/about" component={About} />
+- App.js: <NavLink exact to="/">Home</NavLink>
+          <NavLink to="/about" activeClassName={'custom-active'}>About</NavLink>
+- exact - пути должны полностью совпадать
+  Параметры NavLink:
+- активной ссылке добавляется класс active = a.active
+- activeClassName - меняем активный класс на свой
+- activeStyle={{color: 'red'}} - стили для активной ссылке
+  Конфигурация NavLink:
+- <NavLink to={{
+    pathname: '/cars',    (путь куда ведет ссылка)
+    search: '?a=1&b=2',   (get-параметры которые должны иддти после знака ?)
+    hash: 'id-element'    (hash - позволяет скроллить к нужному элементу)
+  }}>Cars</NavLink>
+  Динамический роутинг:
+- history.push - переход к нужной странице - для классовых компонентов
+  goToHome = () => {
+    this.props.history.push('/')  или
+    this.props.history.push({
+      pathname: '/'
+    })
+  }
+- withRouter - добавляет свойства роутинга history/match... для функциональных компонентов
+  import {withRouter} from 'react-router-dom'
+  const Car = props => {}
+  export default withRouter(Car)
+- Навигация по name:
+  Car.js: <div onClick={() => props.history.push('/cars/'+props.name.toLowerCase())}></div>
+  App.js: <Route path="/cars/:name" component={CardDetail}/>
+  CardDetail.js:  <h1>{this.props.match.params.name}</h1>
+- Switch - объединяет роуты, показывает первый совпаденный Route - аналог exact
+- обработка не существующего url (страница 404):
+  <Switch>
+    <Route ***/>
+    <Route ***/>
+    <Route ***/>
+    <Route render={()=><h1>404 not found</h1>}/> (страница 404 должна идти самая последняя в Switch)
+  </Switch>
+- редирект - переход на другую страницу если url не существует:
+  import Redirect from 'react-router-dom';
+  <Switch>
+    <Route ***/>
+    <Route ***/>
+    <Route ***/>
+    <Redirect to={'/}/>  (редирект на главную если такого url не существует )
+  </Switch>
+- защита роутов:
+  <Switch>
+    <Route ***/>
+    рендерим Route только если isLoggedIn = true:
+    { this.state.isLoggedIn ? <Route path="/contacts" component={Contacts}/> : null }  
+    <Route ***/>
+  </Switch>
