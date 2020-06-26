@@ -4,6 +4,7 @@
 - () => {} - стрелочная ф-ция чтобы не терять контекст this
 - const cls = [] - массив классов <Components className={cls.join(' ')}/>
 
+
 **** Routing *****
 - npm i react-router-dom
 - index.js: <BrowserRouter><App/></BrowserRouter>
@@ -11,6 +12,7 @@
           <Route path="/about" component={About} />
 - App.js: <NavLink exact to="/">Home</NavLink>
           <NavLink to="/about" activeClassName={'custom-active'}>About</NavLink>
+          <Link><Link> - аналог NavLink но без activeClassName и activeStyle
 - exact - пути должны полностью совпадать
   Параметры NavLink:
 - активной ссылке добавляется класс active = a.active
@@ -34,11 +36,11 @@
   import {withRouter} from 'react-router-dom'
   const Car = props => {}
   export default withRouter(Car)
-- Навигация по name:
+- Навигация по name (также по id):
   Car.js: <div onClick={() => props.history.push('/cars/'+props.name.toLowerCase())}></div>
   App.js: <Route path="/cars/:name" component={CardDetail}/>
   CardDetail.js:  <h1>{this.props.match.params.name}</h1>
-- Switch - объединяет роуты, показывает первый совпаденный Route - аналог exact
+- Switch - объединяет роуты, показывает первый совпаденный Route
 - обработка не существующего url (страница 404):
   <Switch>
     <Route ***/>

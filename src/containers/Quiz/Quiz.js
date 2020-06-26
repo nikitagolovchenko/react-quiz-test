@@ -88,13 +88,18 @@ export default class Quiz extends Component {
 	}
 
 	// ф-ция повторного прохождения вопросов - обнуляем результаты:
-	retryHandler = () => { // стрелочная функция - чтобы не терять контекст this
+	retryHandler = () => {
+		// стрелочная функция - чтобы не терять контекст this
 		this.setState({
 			activeQuestion: 0,
 			answerState: null,
 			isFinished: false,
-			results: {}
-		})
+			results: {},
+		});
+	};
+
+	componentDidMount() {
+		console.log('Quiz ID = ', this.props.match.params.id);
 	}
 
 	render() {
@@ -105,7 +110,11 @@ export default class Quiz extends Component {
 
 					{this.state.isFinished ? (
 						// если вопросы закончились показать компонент:
-						<FinishedQuiz results={this.state.results} quiz={this.state.quiz} onRetry={this.retryHandler}/>
+						<FinishedQuiz
+							results={this.state.results}
+							quiz={this.state.quiz}
+							onRetry={this.retryHandler}
+						/>
 					) : (
 						<ActiveQuiz
 							answers={this.state.quiz[this.state.activeQuestion].answers}
