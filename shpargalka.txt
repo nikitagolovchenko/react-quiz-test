@@ -3,6 +3,12 @@
 - Object.keys(obj) - превращает объект obj в массив ключей этого объекта
 - () => {} - стрелочная ф-ция чтобы не терять контекст this
 - const cls = [] - массив классов <Components className={cls.join(' ')}/>
+- !!obj - два !! приводит значение(выражение, объект, массив) к булевому типу
+
+
+**** is_js  - пакет для проверки типов, валидации, email,url,credit и т.д ****
+- npm i is_js
+- is.email('test@test.com'); // вернет true
 
 
 **** Routing *****
@@ -63,3 +69,5 @@
     { this.state.isLoggedIn ? <Route path="/contacts" component={Contacts}/> : null }  
     <Route ***/>
   </Switch>
+
+
