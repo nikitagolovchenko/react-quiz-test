@@ -73,3 +73,17 @@
 
 *** свои фреймворки (form/formFramework) ***
 - набор функций которые можно переиспользовать в разных компонентах (например создание форм-контролов, ф-ция валидации)
+
+
+
+
+*** работа с сервером firebase ( база данных && хостинг && авторизация ) ***
+1) установка axios - для работы с сервером
+- npm i axios   =   для работы с сервером, ajax
+- import axios from 'axios'
+- axios.get('url').then(response => conrole.log(response))
+
+2) создание базы данных
+- develop / database / realtime database / Создать базу данных / Запустить в тестовом режиме
+- axios.get('https://react-quiz-f2cdd.firebaseio.com/quiz.json').then(response => conrole.log(response))
+- +++ нужно дописать к адресу firebase   .json   !!!!!!!!!!
