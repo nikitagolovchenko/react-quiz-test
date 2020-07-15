@@ -9,6 +9,7 @@ import {
 import Input from '../../components/UI/Input/Input';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Select from '../../components/UI/Select/Select';
+import axios from 'axios';
 
 function createOptionControl(number) {
   return createControl(
@@ -87,11 +88,35 @@ export default class QuizCreator extends Component {
     });
   };
 
-  createQuizHandler = (event) => {
+  createQuizHandler = async (event) => {
     event.preventDefault();
 
-    console.log(this.state.quiz);
-    // TODO: Server
+    try {
+      await axios.post(
+        'https://react-quiz-f2cdd.firebaseio.com/quizes.json',
+        this.state.quiz
+      );
+
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    // вариант работы с сервером без async/await:
+    // axios
+    //   .post(
+    //     'https://react-quiz-f2cdd.firebaseio.com/quizes.json',
+    //     this.state.quiz
+    //   )
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   changeHandler = (value, controlName) => {

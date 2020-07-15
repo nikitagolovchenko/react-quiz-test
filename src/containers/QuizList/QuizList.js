@@ -4,35 +4,57 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 export default class QuizList extends Component {
+  state = {
+    quizes: [],
+  };
 
   renderQuizes() {
-    return [1,2,3].map((quiz, index) => {
+    return this.state.quizes.map((quiz) => {
       return (
-        <li key={index}>
+        <li key={quiz.id}>
           {/* переход на страницу /quiz/:id */}
-          <NavLink to={"/quiz/" + quiz}> 
-            Тест {quiz}
+          <NavLink to={'/quiz/' + quiz.id}>
+            {quiz.name}
           </NavLink>
         </li>
-      )
-    })
+      );
+    });
   }
 
-  componentDidMount() {
-    axios.get('https://react-quiz-f2cdd.firebaseio.com/quiz.json').then(response => {
-      console.log(response);
-    })
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        'https://react-quiz-f2cdd.firebaseio.com/quizes.json'
+      );
+
+      const quizes = [];
+
+      // перебор объекта по ключам:
+      Object.keys(response.data).forEach((key, index) => {
+        quizes.push({
+          id: key,
+          name: `Тест №${index + 1}`,
+        });
+      });
+
+      this.setState({
+        quizes,
+      });
+
+      console.log(this.state);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-	render() {
-		return (
-			<div className={classes.QuizList}>
-				<h1>Список тестов</h1>
+  render() {
+    return (
+      <div className={classes.QuizList}>
+        <h1>Список тестов</h1>
 
-        <ul>
-          {this.renderQuizes()}
-        </ul>
-			</div>
-		);
-	}
+        <ul>{this.renderQuizes()}</ul>
+      </div>
+    );
+  }
 }
