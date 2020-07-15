@@ -87,3 +87,27 @@
 - develop / database / realtime database / Создать базу данных / Запустить в тестовом режиме
 - axios.get('https://react-quiz-f2cdd.firebaseio.com/quiz.json').then(response => conrole.log(response))
 - +++ нужно дописать к адресу firebase   .json   !!!!!!!!!!
+
+
+*** async ***
+createQuizHandler = async (event) => {
+   try {
+      await axios.post(
+        'https://react-quiz-f2cdd.firebaseio.com/quizes.json',
+        this.state.quiz
+      );
+
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+- async componentDidMount() {}
+- async function go() {}
+- const xhr = async () => {}
