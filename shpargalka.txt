@@ -88,6 +88,12 @@
 - axios.get('https://react-quiz-f2cdd.firebaseio.com/quiz.json').then(response => conrole.log(response))
 - +++ нужно дописать к адресу firebase   .json   !!!!!!!!!!
 
+3) 
+- Auhtentication - включаем авторизацию по email и паролю
+- Настройки/ ключ api для веб-приложения - это api-key 
+4) для логина смотрим - firebase / sign in with email/password
+5) для регистрации смотрим - firebase / sign up with email/password
+
 
 *** async ***
 createQuizHandler = async (event) => {
@@ -111,3 +117,6 @@ createQuizHandler = async (event) => {
 - async componentDidMount() {}
 - async function go() {}
 - const xhr = async () => {}
+
+
+**** loading.io/css - прелоадеры ****
