@@ -124,6 +124,36 @@ createQuizHandler = async (event) => {
 ==================================
 
 *** REDUX ***
+ПОДГОТОВКА ПРОЕКТА:
 - npm i redux react-redux redux-thunk
-- index.js - создаем store и передаем туда rootReducer, Provider
-- папка store - хранит данных redux: reduxers/actions
+- папка store: 
+  - /actions/actionTypes.js
+  - /reducers/rootReducers.js:
+    -- import {combineReducers} from 'redux';
+    -- export default combineReducers({name: reducerName})
+- index.js:
+  - import { createStore, compose, applyMiddleware } from 'redux';
+    import { Provider } from 'react-redux';
+    import rootReducer from './store/reducers/rootReducer';
+    import thunk from 'redux-thunk';
+  - const composeEnhancers = // берем из github redux-devtools
+  - const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+  - const app = (<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>);
+
+ПЕРЕДАЧА STATE И DISPATCH ACTIONs в компоненте класса:
+// доступно через this.props.quizes | this.props.loading
+- function mapStateToProps(state) {
+    return {
+      quizes: state.quiz.quizes, // название: state.названиеРедюсера.поле
+      loading: state.quiz.loading,
+    };
+  }
+
+// доступно через this.props.fetchQuizes
+- function mapDispatchToProps(dispatch) {
+    return {
+      fetchQuizes: () => dispatch(fetchQuizes()), // название: диспатчим ф-цию,которая возвращает action
+    };
+  }
+
+- export default connect(mapStateToProps, mapDispatchToProps)(QuizList);
