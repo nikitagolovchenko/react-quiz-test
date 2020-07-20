@@ -157,3 +157,5 @@ createQuizHandler = async (event) => {
   }
 
 - export default connect(mapStateToProps, mapDispatchToProps)(QuizList);
+
+/// разделяем глобальный стейт(redux всего приложения) и локальный(форм-контролы, валидация полей формы и т.д)

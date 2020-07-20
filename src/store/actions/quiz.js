@@ -93,10 +93,10 @@ export function finishQuiz() {
   };
 }
 
-export function quizNextQuestion(questionNumber) {
+export function quizNextQuestion(number) {
   return {
     type: QUIZ_NEXT_QUESTION,
-    questionNumber,
+    number,
   };
 }
 
