@@ -42,6 +42,8 @@
   import {withRouter} from 'react-router-dom'
   const Car = props => {}
   export default withRouter(Car)
+- withRouter - также добавляет routeк из BrowserRouter в App, через обертку connect:
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 - Навигация по name (также по id):
   Car.js: <div onClick={() => props.history.push('/cars/'+props.name.toLowerCase())}></div>
   App.js: <Route path="/cars/:name" component={CardDetail}/>
@@ -120,6 +122,15 @@ createQuizHandler = async (event) => {
 
 
 **** loading.io/css - прелоадеры ****
+
+
+*** Деплой, хостинг на firebase (firebase.com/hosting)***
+- npm install -g firebase-tools
+- npm run build
+- firebase login
+- firebase init / выбираем Hosting - жмем пробел / use an existing project / react-quiz (выбираем проект) / build (папка директории) / yes / no
+- firebase deploy
+// получили ссылку на проект в firebase - react-quiz-f2cdd.web.app
 
 ==================================
 
